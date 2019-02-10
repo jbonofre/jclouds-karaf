@@ -28,20 +28,8 @@ limitations under the License.
 
   <groupId>org.apache.jclouds.karaf.chef</groupId>
   <artifactId>services</artifactId>
-  <version>2.2.0-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>jclouds :: Karaf :: Chef :: Services</name>
-
-  <properties>
-    <osgi.import>org.jclouds.rest;version=${jclouds.version},*</osgi.import>
-    <osgi.private>
-      org.jclouds.karaf.chef.core*,
-      org.jclouds.karaf.chef.services*
-    </osgi.private>
-    <osgi.activator>
-      org.jclouds.karaf.chef.services.Activator
-    </osgi.activator>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -72,6 +60,7 @@ limitations under the License.
       <groupId>org.osgi</groupId>
       <artifactId>osgi.cmpn</artifactId>
     </dependency>
+
     <!-- Testing -->
     <dependency>
       <groupId>junit</groupId>
@@ -89,5 +78,26 @@ limitations under the License.
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <Bundle-Activator>org.jclouds.karaf.chef.services.Activator</Bundle-Activator>
+            <Import-Package>
+              org.jclouds.rest;version=${jclouds.version},*
+            </Import-Package>
+            <Private-Package>
+              org.jclouds.karaf.chef.core*,
+              org.jclouds.karaf.chef.services*
+            </Private-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

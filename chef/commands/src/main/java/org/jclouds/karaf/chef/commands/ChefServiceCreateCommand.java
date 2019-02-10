@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.chef.commands;
 
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.Option;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
 import org.jclouds.apis.Apis;
 import org.jclouds.chef.ChefApi;
 import org.jclouds.karaf.chef.core.ChefConstants;
@@ -32,6 +32,7 @@ import org.osgi.service.cm.ConfigurationAdmin;
 
 import java.util.*;
 
+@Service
 @Command(scope = "chef", name = "service-create", description = "Creates a chef service")
 public class ChefServiceCreateCommand extends ChefCommandWithOptions {
 
@@ -44,7 +45,7 @@ public class ChefServiceCreateCommand extends ChefCommandWithOptions {
     private BundleContext bundleContext;
 
     @Override
-    protected Object doExecute() throws Exception {
+    public Object execute() throws Exception {
         if (name == null && api != null) {
             name = api;
         }

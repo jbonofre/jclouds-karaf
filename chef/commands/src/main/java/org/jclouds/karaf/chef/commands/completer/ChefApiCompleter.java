@@ -20,6 +20,7 @@ import static org.jclouds.karaf.chef.core.ChefHelper.CHEF_TOKEN;
 
 import java.util.List;
 
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
 import org.apache.karaf.shell.api.action.lifecycle.Service;
 import org.apache.karaf.shell.api.console.CommandLine;
 import org.apache.karaf.shell.api.console.Completer;
@@ -34,6 +35,8 @@ import org.jclouds.rest.ApiContext;
 public class ChefApiCompleter implements Completer {
 
     private final StringsCompleter delegate = new StringsCompleter();
+
+    @Reference
     private List<ApiContext<ChefApi>> chefServices;
 
     private final boolean displayApisWithoutService;
@@ -60,15 +63,7 @@ public class ChefApiCompleter implements Completer {
         } catch (Exception ex) {
             // noop
         }
-        return delegate.complete(buffer, cursor, candidates);
-    }
-
-    public List<ApiContext<ChefApi>> getChefServices() {
-        return chefServices;
-    }
-
-    public void setChefServices(List<ApiContext<ChefApi>> chefServices) {
-        this.chefServices = chefServices;
+        return delegate.complete(session, commandLine, candidates);
     }
 
 }

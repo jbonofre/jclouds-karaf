@@ -14,10 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.chef.commands.completer;
 
-import org.apache.karaf.shell.console.Completer;
+import org.apache.karaf.shell.api.console.Completer;
 import org.jclouds.chef.ChefApi;
 import org.jclouds.chef.domain.CookbookVersion;
 import org.jclouds.karaf.chef.core.ChefConstants;

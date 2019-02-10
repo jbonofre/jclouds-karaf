@@ -14,13 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.chef.commands;
 
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Option;
 import org.jclouds.chef.ChefApi;
 import org.jclouds.karaf.chef.core.ChefHelper;
 import org.jclouds.rest.ApiContext;

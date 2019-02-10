@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.chef.commands;
 
 import java.io.IOException;
@@ -23,8 +22,8 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 
-import org.apache.felix.service.command.CommandSession;
-import org.apache.karaf.shell.console.AbstractAction;
+import jdk.nashorn.internal.ir.annotations.Reference;
+import org.apache.karaf.shell.api.action.Action;
 import org.jclouds.apis.ApiMetadata;
 import org.jclouds.chef.ChefApi;
 import org.jclouds.chef.domain.CookbookVersion;
@@ -37,31 +36,23 @@ import org.jclouds.karaf.commands.table.internal.PropertyShellTableFactory;
 import org.jclouds.karaf.core.Constants;
 import org.jclouds.karaf.utils.ServiceHelper;
 import org.jclouds.rest.ApiContext;
-import org.jclouds.rest.AuthorizationException;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 
 
-public abstract class ChefCommandBase extends AbstractAction {
+public abstract class ChefCommandBase implements Action {
 
     public static final String PROVIDERFORMAT = "%-24s %-12s %-12s";
     public static final String FACTORY_FILTER = "(service.factoryPid=%s)";
 
+    @Reference
     protected ConfigurationAdmin configAdmin;
+
     protected CacheProvider cacheProvider = new BasicCacheProvider();
     protected List<ApiContext<ChefApi>> chefServices = new ArrayList<ApiContext<ChefApi>>();
     protected ShellTableFactory shellTableFactory = new PropertyShellTableFactory();
 
-    @Override
-    public Object execute(CommandSession session) throws Exception {
-        try {
-            this.session = session;
-            return doExecute();
-        } catch (AuthorizationException ex) {
-            System.err.println("Authorization error. Please make sure you provided valid identity and credential.");
-            return null;
-        }
-    }
+    public abstract Object execute() throws Exception;
 
     protected void printChefApis(Iterable<ApiMetadata> apis, List<ApiContext<ChefApi>> chefServices, PrintStream out) {
         out.println(String.format(PROVIDERFORMAT, "[id]", "[type]", "[service]"));

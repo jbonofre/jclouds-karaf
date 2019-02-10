@@ -14,18 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.chef.commands;
 
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
 import org.jclouds.chef.ChefApi;
 import org.jclouds.rest.ApiContext;
 
+@Service
 @Command(scope = "chef", name = "cookbook-list", description = "Lists the Chef Cook Books")
 public class ChefCookbookListCommand extends ChefCommandWithOptions {
 
     @Override
-    protected Object doExecute() throws Exception {
+    public Object execute() throws Exception {
        ApiContext<ChefApi> service = null;
         try {
             service = getChefService();

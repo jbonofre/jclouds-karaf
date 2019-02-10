@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.chef.commands;
 
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.Option;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
 import org.jclouds.chef.ChefService;
 import org.jclouds.chef.domain.BootstrapConfig;
 import org.jclouds.chef.util.RunListBuilder;
@@ -27,6 +27,7 @@ import org.jclouds.scriptbuilder.domain.Statement;
 
 import java.util.List;
 
+@Service
 @Command(scope = "chef", name = "node-bootstrap", description = "Bootstraps a node.")
 public class ChefGroupBootStrap extends ChefRunscriptBase {
 

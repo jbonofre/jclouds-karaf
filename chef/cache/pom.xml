@@ -31,19 +31,6 @@ limitations under the License.
   <packaging>bundle</packaging>
   <name>jclouds :: Karaf :: Chef :: Cache</name>
 
-  <properties>
-    <osgi.export>org.jclouds.karaf.chef.cache;version=${project.version};-noimport:=true</osgi.export>
-    <osgi.export.service>org.jclouds.karaf.cache.CacheProvider</osgi.export.service>
-    <osgi.import>
-      org.jclouds.chef*;version=${jclouds.chef.version},
-      org.jclouds.karaf.cache*,
-      org.jclouds*;version=${jclouds.version},
-      *
-    </osgi.import>
-    <osgi.private>org.jclouds.karaf.cache.utils</osgi.private>
-    <osgi.activator>org.jclouds.karaf.chef.cache.Activator</osgi.activator>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.osgi</groupId>
@@ -70,5 +57,31 @@ limitations under the License.
       <artifactId>slf4j-api</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <Bundle-Activator>org.jclouds.karaf.chef.cache.Activator</Bundle-Activator>
+            <Export-Package>
+              org.jclouds.karaf.chef.cache;version=${project.version};-noimport:=true
+            </Export-Package>
+            <Import-Package>
+              org.jclouds.chef*;version=${jclouds.chef.version},
+              org.jclouds.karaf.cache*,
+              org.jclouds*;version=${jclouds.version},
+              *
+            </Import-Package>
+            <Private-Package>
+              org.jclouds.karaf.cache.utils
+            </Private-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

@@ -14,19 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.chef.commands;
 
 import static org.jclouds.karaf.chef.core.ChefHelper.CHEF_TOKEN;
 
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
 import org.jclouds.apis.Apis;
 
+@Service
 @Command(scope = "chef", name = "service-list", description = "Lists the Chef Services")
 public class ChefServiceListCommand extends ChefCommandBase {
 
     @Override
-    protected Object doExecute() throws Exception {
+    public Object execute() throws Exception {
         try {
             System.out.println("Chef APIs:");
             System.out.println("-------------");

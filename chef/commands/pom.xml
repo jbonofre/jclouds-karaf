@@ -31,33 +31,11 @@ limitations under the License.
   <packaging>bundle</packaging>
   <name>jclouds :: Karaf :: Chef :: Commands</name>
 
-  <properties>
-    <osgi.export>org.jclouds.karaf.chef.commands*</osgi.export>
-    <osgi.import>
-      javax.script,
-      org.codehaus.groovy.jsr223,
-      org.jclouds.karaf.cache*;version=${project.version},
-      org.jclouds.compute;version=${jclouds.version},
-      org.apache.felix.service.command,
-      org.apache.felix.gogo.commands,
-      org.apache.karaf.shell.console;version="[2.2,4)",
-      org.apache.karaf.shell.console.commands;version="[2.2,4)",
-      org.apache.karaf.shell.console.completer;version="[2.2,4)",
-      *
-    </osgi.import>
-    <osgi.private>
-      org.jclouds.karaf.chef.core*,
-      org.jclouds.karaf.utils*,
-    </osgi.private>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.apache.jclouds.api</groupId>
       <artifactId>chef</artifactId>
     </dependency>
-
-    <!-- Internal Dependencies -->
     <dependency>
       <groupId>org.apache.jclouds.karaf</groupId>
       <artifactId>cache</artifactId>
@@ -119,4 +97,41 @@ limitations under the License.
       <artifactId>slf4j-api</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-services-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <Export-Package>
+              org.jclouds.karaf.chef.commands*
+            </Export-Package>
+            <Import-Package>
+              javax.script,
+              org.codehaus.groovy.jsr223,
+              org.jclouds.karaf.cache*;version=${project.version},
+              org.jclouds.compute;version=${jclouds.version},
+              org.apache.felix.service.command,
+              org.apache.felix.gogo.commands,
+              org.apache.karaf.shell.console;version="[2.2,4)",
+              org.apache.karaf.shell.console.commands;version="[2.2,4)",
+              org.apache.karaf.shell.console.completer;version="[2.2,4)",
+              *
+            </Import-Package>
+            <Private-Package>
+              org.jclouds.karaf.chef.core*,
+              org.jclouds.karaf.utils*
+            </Private-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>

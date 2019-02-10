@@ -14,14 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.chef.commands;
 
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 
+@Service
 @Command(scope = "chef", name = "service-destroy", description = "Destroys a chef service")
 public class ChefServiceDestroyCommand extends ChefCommandBase {
 
@@ -29,7 +30,7 @@ public class ChefServiceDestroyCommand extends ChefCommandBase {
   protected String id;
 
    @Override
-   protected Object doExecute() throws Exception {
+   public Object execute() throws Exception {
       Configuration configuration = findOrCreateFactoryConfiguration(configAdmin, "org.jclouds.chef", id, null);
       if (configuration != null) {
          configuration.delete();

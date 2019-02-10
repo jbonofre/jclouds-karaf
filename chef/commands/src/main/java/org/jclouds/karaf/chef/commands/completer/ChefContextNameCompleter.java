@@ -14,23 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.chef.commands.completer;
 
 import java.util.List;
 
-import org.apache.karaf.shell.console.Completer;
-import org.apache.karaf.shell.console.completer.StringsCompleter;
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
+import org.apache.karaf.shell.api.console.CommandLine;
+import org.apache.karaf.shell.api.console.Completer;
+import org.apache.karaf.shell.api.console.Session;
+import org.apache.karaf.shell.support.completers.StringsCompleter;
 import org.jclouds.chef.ChefApi;
 import org.jclouds.rest.ApiContext;
 
+@Service
 public class ChefContextNameCompleter implements Completer {
 
     private final StringsCompleter delegate = new StringsCompleter();
+
+    @Reference
     private List<ApiContext<ChefApi>> chefServices;
 
     @Override
-    public int complete(String buffer, int cursor, List<String> candidates) {
+    public int complete(Session session, CommandLine commandLine, List<String> candidates) {
         try {
             if (chefServices != null) {
                 for (ApiContext<ChefApi> ctx : chefServices) {
@@ -43,14 +49,7 @@ public class ChefContextNameCompleter implements Completer {
         } catch (Exception ex) {
             // noop
         }
-        return delegate.complete(buffer, cursor, candidates);
+        return delegate.complete(session, commandLine, candidates);
     }
 
-    public List<ApiContext<ChefApi>> getChefServices() {
-        return chefServices;
-    }
-
-    public void setChefServices(List<ApiContext<ChefApi>> chefServices) {
-        this.chefServices = chefServices;
-    }
 }
