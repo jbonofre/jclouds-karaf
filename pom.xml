@@ -55,14 +55,41 @@ limitations under the License.
       <email>iocanel@gmail.com</email>
       <url>http://iocanel.blogspot.com</url>
     </developer>
+    <developer>
+      <id>jbonofre</id>
+      <name>Jean-Baptiste Onofré</name>
+      <email>jbonofre@apache.org</email>
+      <url>http://blog.nanthrax.net</url>
+    </developer>
   </developers>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>${maven-bundle-plugin.version}</version>
+          <inherited>true</inherited>
+          <extensions>true</extensions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.karaf.tooling</groupId>
+          <artifactId>karaf-maven-plugin</artifactId>
+          <version>${karaf.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.karaf.tooling</groupId>
+          <artifactId>karaf-services-maven-plugin</artifactId>
+          <version>${karaf.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
-        <version>0.10</version>
+        <version>0.13</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -110,47 +137,12 @@ limitations under the License.
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <version>${maven-bundle-plugin.version}</version>
-        <extensions>true</extensions>
-        <inherited>true</inherited>
-        <configuration>
-          <instructions>
-            <Bundle-Name>${project.name}</Bundle-Name>
-            <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
-            <Export-Package>${osgi.export}</Export-Package>
-            <Import-Package>${osgi.import}</Import-Package>
-            <DynamicImport-Package>${osgi.dynamic.import}</DynamicImport-Package>
-            <Private-Package>${osgi.private}</Private-Package>
-            <Require-Bundle>${osgi.bundles}</Require-Bundle>
-            <Bundle-Activator>${osgi.activator}</Bundle-Activator>
-            <Export-Service>${osgi.export.service}</Export-Service>
-          </instructions>
-          <supportedProjectTypes>
-            <supportedProjectType>jar</supportedProjectType>
-            <supportedProjectType>war</supportedProjectType>
-            <supportedProjectType>bundle</supportedProjectType>
-          </supportedProjectTypes>
-          <unpackBundle>true</unpackBundle>
-        </configuration>
-        <executions>
-          <execution>
-            <id>bundle-manifest</id>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>manifest</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
       <plugin>
@@ -183,7 +175,7 @@ limitations under the License.
   </modules>
 
   <properties>
-    <jdk.version>1.7</jdk.version>
+    <jdk.version>1.8</jdk.version>
     <aopalliance.bundle.version>1.0_5</aopalliance.bundle.version>
     <bcprov.version>1.51</bcprov.version>
     <easymock.version>3.0</easymock.version>
@@ -212,7 +204,7 @@ limitations under the License.
     <junit.version>4.8.2</junit.version>
     <jzlib.bundle.version>1.0.7_1</jzlib.bundle.version>
     <jzlib.version>1.0.7</jzlib.version>
-    <karaf.version>4.0.9</karaf.version>
+    <karaf.version>4.2.2</karaf.version>
     <net.oauth.bundle.version>20100527_1</net.oauth.bundle.version>
     <netty.bundle.version>3.5.9.Final</netty.bundle.version>
     <osgi.version>6.0.0</osgi.version>
@@ -229,7 +221,7 @@ limitations under the License.
 
     <!-- Plugin Versions -->
     <depends-maven-plugin.version>1.2</depends-maven-plugin.version>
-    <maven-bundle-plugin.version>2.1.0</maven-bundle-plugin.version>
+    <maven-bundle-plugin.version>4.1.0</maven-bundle-plugin.version>
     <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
     <maven-dependency-plugin.version>2.3</maven-dependency-plugin.version>
     <maven-war-plugin.version>2.1.1</maven-war-plugin.version>
@@ -554,18 +546,7 @@ limitations under the License.
       <!-- Karaf Dependencies -->
       <dependency>
         <groupId>org.apache.karaf.shell</groupId>
-        <artifactId>org.apache.karaf.shell.console</artifactId>
-        <version>${karaf.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.karaf.tooling.exam</groupId>
-        <artifactId>org.apache.karaf.tooling.exam.options</artifactId>
-        <version>${karaf.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.karaf.tooling.exam</groupId>
-        <artifactId>org.apache.karaf.tooling.exam.container</artifactId>
+        <artifactId>org.apache.karaf.shell.core</artifactId>
         <version>${karaf.version}</version>
       </dependency>
 

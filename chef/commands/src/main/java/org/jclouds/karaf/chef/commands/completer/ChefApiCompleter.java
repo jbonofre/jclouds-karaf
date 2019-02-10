@@ -14,20 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.chef.commands.completer;
 
 import static org.jclouds.karaf.chef.core.ChefHelper.CHEF_TOKEN;
 
 import java.util.List;
 
-import org.apache.karaf.shell.console.Completer;
-import org.apache.karaf.shell.console.completer.StringsCompleter;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
+import org.apache.karaf.shell.api.console.CommandLine;
+import org.apache.karaf.shell.api.console.Completer;
+import org.apache.karaf.shell.api.console.Session;
+import org.apache.karaf.shell.support.completers.StringsCompleter;
 import org.jclouds.apis.ApiMetadata;
 import org.jclouds.apis.Apis;
 import org.jclouds.chef.ChefApi;
 import org.jclouds.rest.ApiContext;
 
+@Service
 public class ChefApiCompleter implements Completer {
 
     private final StringsCompleter delegate = new StringsCompleter();
@@ -40,7 +43,7 @@ public class ChefApiCompleter implements Completer {
     }
 
     @Override
-    public int complete(String buffer, int cursor, List<String> candidates) {
+    public int complete(Session session, CommandLine commandLine, List<String> candidates) {
         try {
             if (displayApisWithoutService) {
                 for (ApiMetadata apiMetadata : Apis.contextAssignableFrom(CHEF_TOKEN)) {

@@ -25,6 +25,7 @@ limitations under the License.
   </parent>
 
   <!--
+    TODO: should be fixed now, I will double check
     This bundle fixes the `org.apache.servicemix.bundles.jsch-agentproxy-jsch` bundle
     by not exporting the core packages that are already exported by other bundles.
   -->
@@ -40,40 +41,34 @@ limitations under the License.
       <version>${jsch.agentproxy.bundle.version}</version>
     </dependency>
   </dependencies>
-
-  <properties>
-    <import.packages>
-      ft.jzlib;resolution:=optional;version="[1.1,2)",
-      keypairgen;resolution:=optional,
-      signature;resolution:=optional,
-      userauth;resolution:=optional,
-      org.ietf.jgss;resolution:=optional,
-      javax.crypto,
-      javax.crypto.interfaces,
-      javax.crypto.spec,
-      javax.naming, 
-      javax.naming.directory, 
-      javax.net, 
-      javax.security.auth.x500
-    </import.packages>
-  </properties>
   
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <version>2.3.7</version>
         <configuration>
           <instructions>
-            <Import-Package>${import.packages}</Import-Package>
+            <Import-Package>
+              ft.jzlib;resolution:=optional;version="[1.1,2)",
+              keypairgen;resolution:=optional,
+              signature;resolution:=optional,
+              userauth;resolution:=optional,
+              org.ietf.jgss;resolution:=optional,
+              javax.crypto,
+              javax.crypto.interfaces,
+              javax.crypto.spec,
+              javax.naming,
+              javax.naming.directory,
+              javax.net,
+              javax.security.auth.x500
+            </Import-Package>
           </instructions>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>2.4.3</version>
         <executions>
           <execution>
             <phase>package</phase>
