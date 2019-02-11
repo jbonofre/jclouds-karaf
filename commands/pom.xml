@@ -130,6 +130,30 @@
             <Export-Package>
               org.jclouds.karaf.commands*
             </Export-Package>
+            <Export-Service>
+              org.jclouds.karaf.commands.table.ShellTableFactory,
+              org.apache.karaf.shell.console.Completer;completer-type=compute-service-id,
+              org.apache.karaf.shell.console.Completer;completer-type=compute-provider,
+              org.apache.karaf.shell.console.Completer;completer-type=available-compute-provider,
+              org.apache.karaf.shell.console.Completer;completer-type=compute-api,
+              org.apache.karaf.shell.console.Completer;completer-type=available-compute-api,
+              org.apache.karaf.shell.console.Completer;completer-type=active-node,
+              org.apache.karaf.shell.console.Completer;completer-type=inactive-node,
+              org.apache.karaf.shell.console.Completer;completer-type=group,
+              org.apache.karaf.shell.console.Completer;completer-type=suspended-node,
+              org.apache.karaf.shell.console.Completer;completer-type=image,
+              org.apache.karaf.shell.console.Completer;completer-type=location,
+              org.apache.karaf.shell.console.Completer;completer-type=hardware,
+              org.apache.karaf.shell.console.Completer;completer-type=osfamily,
+              org.apache.karaf.shell.console.Completer;completer-type=blobstore-service-id,
+              org.apache.karaf.shell.console.Completer;completer-type=blobstore-provider,
+              org.apache.karaf.shell.console.Completer;completer-type=available-blobstore-provider,
+              org.apache.karaf.shell.console.Completer;completer-type=blobstore-api,
+              org.apache.karaf.shell.console.Completer;completer-type=available-blobstore-api,
+              org.apache.karaf.shell.console.Completer;completer-type=blob,
+              org.apache.karaf.shell.console.Completer;completer-type=container,
+              org.apache.karaf.shell.console.Completer;completer-type=recipe
+            </Export-Service>
             <Import-Package>
               javax.script,
               org.codehaus.groovy.jsr223,
