@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 
-import jdk.nashorn.internal.ir.annotations.Reference;
 import org.apache.karaf.shell.api.action.Action;
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
 import org.jclouds.apis.ApiMetadata;
 import org.jclouds.chef.ChefApi;
 import org.jclouds.chef.domain.CookbookVersion;
@@ -45,11 +45,16 @@ public abstract class ChefCommandBase implements Action {
     public static final String PROVIDERFORMAT = "%-24s %-12s %-12s";
     public static final String FACTORY_FILTER = "(service.factoryPid=%s)";
 
-    @Reference
+    @Reference(optional = true)
     protected ConfigurationAdmin configAdmin;
 
+    @Reference(optional = false)
     protected CacheProvider cacheProvider = new BasicCacheProvider();
+
+    @Reference(optional = true)
     protected List<ApiContext<ChefApi>> chefServices = new ArrayList<ApiContext<ChefApi>>();
+
+    @Reference(optional = false)
     protected ShellTableFactory shellTableFactory = new PropertyShellTableFactory();
 
     public abstract Object execute() throws Exception;
@@ -119,36 +124,4 @@ public abstract class ChefCommandBase implements Action {
         return configuration;
     }
 
-
-    public ConfigurationAdmin getConfigAdmin() {
-        return configAdmin;
-    }
-
-    public void setConfigAdmin(ConfigurationAdmin configAdmin) {
-        this.configAdmin = configAdmin;
-    }
-
-    public CacheProvider getCacheProvider() {
-        return cacheProvider;
-    }
-
-    public void setCacheProvider(CacheProvider cacheProvider) {
-        this.cacheProvider = cacheProvider;
-    }
-
-    public List<ApiContext<ChefApi>> getChefServices() {
-        return chefServices;
-    }
-
-    public void setChefServices(List<ApiContext<ChefApi>> chefServices) {
-        this.chefServices = chefServices;
-    }
-
-    public ShellTableFactory getShellTableFactory() {
-        return shellTableFactory;
-    }
-
-    public void setShellTableFactory(ShellTableFactory shellTableFactory) {
-        this.shellTableFactory = shellTableFactory;
-    }
 }

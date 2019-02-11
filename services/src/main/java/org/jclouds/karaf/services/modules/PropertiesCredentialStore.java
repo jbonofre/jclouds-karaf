@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.services.modules;
 
 import org.jclouds.domain.Credentials;
@@ -116,7 +115,6 @@ public class PropertiesCredentialStore extends CredentialStore {
                 }
             }
         }
-
 
         public int size() {
             return credentialsMap.size();

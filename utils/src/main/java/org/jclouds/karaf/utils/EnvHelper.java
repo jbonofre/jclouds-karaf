@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.utils;
 
 import java.io.File;
@@ -89,7 +88,7 @@ public class EnvHelper {
     /**
      * Returns the credential value and falls back to env if the specified value is null.
      *
-     * @param The provider id
+     * @param provider provider id
      * @param credential
      * @return
      */
@@ -164,7 +163,7 @@ public class EnvHelper {
     /**
      * Returns the credential value and falls back to env if the specified value is null.
      *
-     * @param The provider id
+     * @param provider provider id
      * @param credential
      * @return
      */

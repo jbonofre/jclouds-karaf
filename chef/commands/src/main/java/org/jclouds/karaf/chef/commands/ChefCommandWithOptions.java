@@ -19,8 +19,10 @@ package org.jclouds.karaf.chef.commands;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.karaf.shell.api.action.Completion;
 import org.apache.karaf.shell.api.action.Option;
 import org.jclouds.chef.ChefApi;
+import org.jclouds.karaf.chef.commands.completer.ChefApiCompleter;
 import org.jclouds.karaf.chef.core.ChefHelper;
 import org.jclouds.rest.ApiContext;
 
@@ -30,6 +32,7 @@ public abstract class ChefCommandWithOptions extends ChefCommandBase {
     protected String name;
 
     @Option(name = "--api", description = "The api or use.")
+    @Completion(ChefApiCompleter.class)
     protected String api = "chef";
 
     @Option(name = "--client-name", description = "The name of the client.")
@@ -47,7 +50,6 @@ public abstract class ChefCommandWithOptions extends ChefCommandBase {
     @Option(name = "--endpoint", description = "The endpoint to use for a chef service.")
     protected String endpoint;
 
-    @Override
     public List<ApiContext<ChefApi>> getChefServices() {
         if (api == null) {
             return chefServices;

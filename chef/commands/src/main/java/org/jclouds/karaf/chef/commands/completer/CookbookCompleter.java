@@ -16,14 +16,15 @@
  */
 package org.jclouds.karaf.chef.commands.completer;
 
-import org.apache.karaf.shell.api.console.Completer;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
 import org.jclouds.chef.ChefApi;
 import org.jclouds.chef.domain.CookbookVersion;
 import org.jclouds.karaf.chef.core.ChefConstants;
 import org.jclouds.karaf.utils.ServiceHelper;
 import org.jclouds.rest.ApiContext;
 
-public class CookbookCompleter extends ChefCompleterSupport implements Completer {
+@Service
+public class CookbookCompleter extends ChefCompleterSupport {
 
     public void init() {
         cache = cacheProvider.getProviderCacheForType(ChefConstants.COOKBOOK_CACHE);

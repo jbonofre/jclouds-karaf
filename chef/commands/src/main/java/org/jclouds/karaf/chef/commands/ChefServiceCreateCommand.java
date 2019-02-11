@@ -18,6 +18,7 @@ package org.jclouds.karaf.chef.commands;
 
 import org.apache.karaf.shell.api.action.Command;
 import org.apache.karaf.shell.api.action.Option;
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
 import org.apache.karaf.shell.api.action.lifecycle.Service;
 import org.jclouds.apis.Apis;
 import org.jclouds.chef.ChefApi;
@@ -42,6 +43,7 @@ public class ChefServiceCreateCommand extends ChefCommandWithOptions {
     @Option(name = "--no-wait", multiValued = true, description = "Don't wait for compute service registration.")
     protected boolean noWait;
 
+    @Reference
     private BundleContext bundleContext;
 
     @Override

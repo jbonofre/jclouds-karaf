@@ -14,12 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.commands.blobstore.completer;
 
 import com.google.common.reflect.TypeToken;
-import org.apache.karaf.shell.console.Completer;
-import org.apache.karaf.shell.console.completer.StringsCompleter;
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
+import org.apache.karaf.shell.api.console.CommandLine;
+import org.apache.karaf.shell.api.console.Completer;
+import org.apache.karaf.shell.api.console.Session;
+import org.apache.karaf.shell.support.completers.StringsCompleter;
 import org.jclouds.apis.ApiMetadata;
 import org.jclouds.apis.Apis;
 import org.jclouds.blobstore.BlobStore;
@@ -27,9 +30,12 @@ import org.jclouds.blobstore.BlobStoreContext;
 
 import java.util.List;
 
+@Service
 public class BlobStoreApiCompleter implements Completer {
 
    private final StringsCompleter delegate = new StringsCompleter();
+
+   @Reference
    private List<? extends BlobStore> blobStoreServices;
 
    private final boolean displayApisWithoutService;
@@ -39,7 +45,7 @@ public class BlobStoreApiCompleter implements Completer {
    }
 
   @Override
-   public int complete(String buffer, int cursor, List<String> candidates) {
+   public int complete(Session session, CommandLine commandLine, List<String> candidates) {
       try {
         if (displayApisWithoutService) {
           for (ApiMetadata apiMetadata : Apis.viewableAs(TypeToken.of(BlobStoreContext.class))) {
@@ -56,14 +62,7 @@ public class BlobStoreApiCompleter implements Completer {
       } catch (Exception ex) {
          // noop
       }
-      return delegate.complete(buffer, cursor, candidates);
+      return delegate.complete(session, commandLine, candidates);
    }
 
-   public List<? extends BlobStore> getBlobStoreServices() {
-      return blobStoreServices;
-   }
-
-   public void setBlobStoreServices(List<? extends BlobStore> blobStoreServices) {
-      this.blobStoreServices = blobStoreServices;
-   }
 }

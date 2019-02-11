@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.services;
 
 import com.google.common.base.Strings;
@@ -69,7 +68,6 @@ public abstract class ServiceFactorySupport implements ManagedServiceFactory, Pr
             }
         }
     }
-
 
     public void removed(ProviderMetadata provider) {
         if (!apply(provider)) {

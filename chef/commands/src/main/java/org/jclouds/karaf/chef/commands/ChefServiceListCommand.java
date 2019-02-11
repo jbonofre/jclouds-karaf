@@ -31,7 +31,7 @@ public class ChefServiceListCommand extends ChefCommandBase {
         try {
             System.out.println("Chef APIs:");
             System.out.println("-------------");
-            printChefApis(Apis.contextAssignableFrom(CHEF_TOKEN), getChefServices(), System.out);
+            printChefApis(Apis.contextAssignableFrom(CHEF_TOKEN), chefServices, System.out);
         } catch (Exception ex) {
             // noop
         }

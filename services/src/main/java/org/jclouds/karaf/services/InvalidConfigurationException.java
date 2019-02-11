@@ -17,6 +17,7 @@
 package org.jclouds.karaf.services;
 
 public class InvalidConfigurationException extends Exception {
+
     public InvalidConfigurationException() {
     }
 
@@ -31,4 +32,5 @@ public class InvalidConfigurationException extends Exception {
     public InvalidConfigurationException(Throwable throwable) {
         super(throwable);
     }
+
 }
