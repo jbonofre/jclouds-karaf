@@ -79,6 +79,9 @@
             <Export-Package>
               org.jclouds.karaf.cache*;version=${project.version};-noimport:=true
             </Export-Package>
+            <Export-Service>
+              org.jclouds.karaf.cache.CacheProvider
+            </Export-Service>
             <Import-Package>
               org.jclouds.karaf.recipe*,
               org.jclouds*;version=${jclouds.version},
