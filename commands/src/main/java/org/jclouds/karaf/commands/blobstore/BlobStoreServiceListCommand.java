@@ -18,7 +18,7 @@
 package org.jclouds.karaf.commands.blobstore;
 
 import com.google.common.reflect.TypeToken;
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.api.action.Command;
 import org.jclouds.apis.Apis;
 import org.jclouds.blobstore.BlobStoreContext;
 import org.jclouds.providers.Providers;
@@ -26,9 +26,8 @@ import org.jclouds.providers.Providers;
 @Command(scope = "jclouds", name = "blobstore-service-list", description = "List available BlobStore services.", detailedDescription = "classpath:blobstore-service-list.txt")
 public class BlobStoreServiceListCommand extends BlobStoreCommandBase {
 
-
     @Override
-    protected Object doExecute() throws Exception {
+    public Object execute() throws Exception {
         try {
             System.out.println("BlobStore APIs:");
             System.out.println("---------------");

@@ -20,8 +20,7 @@ package org.jclouds.karaf.commands.blobstore;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Module;
-import org.apache.felix.gogo.commands.Option;
-import org.apache.felix.service.command.CommandSession;
+import org.apache.karaf.shell.api.action.Option;
 import org.jclouds.Constants;
 import org.jclouds.ContextBuilder;
 import org.jclouds.blobstore.BlobStore;
@@ -59,10 +58,7 @@ public abstract class BlobStoreCommandWithOptions extends BlobStoreCommandBase {
    protected String propertiesFile;
 
    @Override
-   public Object execute(CommandSession session) throws Exception {
-      this.session = session;
-      return doExecute();
-   }
+   public abstract Object execute() throws Exception;
 
    protected List<BlobStore> getBlobStoreServices() {
       if (provider == null && api == null) {

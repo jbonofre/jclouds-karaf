@@ -17,15 +17,13 @@
 
 package org.jclouds.karaf.commands.blobstore;
 
-import java.io.PrintStream;
-import java.util.Date;
 import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.BaseEncoding;
 
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
 import org.jclouds.blobstore.BlobStore;
 import org.jclouds.blobstore.KeyNotFoundException;
 import org.jclouds.blobstore.domain.BlobMetadata;
@@ -44,7 +42,7 @@ public class BlobMetadataCommand extends BlobStoreCommandWithOptions {
    List<String> blobNames = Lists.newArrayList();
 
    @Override
-   protected Object doExecute() throws Exception {
+   public Object execute() throws Exception {
       BlobStore blobStore = getBlobStore();
 
       for (String blobName : blobNames) {

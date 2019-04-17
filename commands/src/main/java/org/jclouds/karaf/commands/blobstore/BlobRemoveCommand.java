@@ -20,9 +20,8 @@ package org.jclouds.karaf.commands.blobstore;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
 import org.jclouds.blobstore.BlobStore;
 
 /**
@@ -38,7 +37,7 @@ public class BlobRemoveCommand extends BlobStoreCommandWithOptions {
    List<String> blobNames = new LinkedList<String>();
 
    @Override
-   protected Object doExecute() throws Exception {
+   public Object execute() throws Exception {
       BlobStore blobStore = getBlobStore();
       for (String blobName : blobNames) {
          blobStore.removeBlob(container, blobName);

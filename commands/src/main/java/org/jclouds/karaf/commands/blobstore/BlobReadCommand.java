@@ -24,19 +24,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.CommandException;
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.Option;
 import org.jclouds.blobstore.BlobStore;
-import org.jclouds.blobstore.KeyNotFoundException;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Strings;
 import com.google.common.io.CharStreams;
-import com.google.common.io.Closeables;
 import com.google.common.io.Files;
-import com.google.common.io.InputSupplier;
 
 @Command(scope = "jclouds", name = "blobstore-read", description = "Reads data from the blobstore")
 public class BlobReadCommand extends BlobStoreCommandWithOptions {
@@ -57,7 +52,7 @@ public class BlobReadCommand extends BlobStoreCommandWithOptions {
    boolean signedRequest;
 
    @Override
-   protected Object doExecute() throws Exception {
+   public Object execute() throws Exception {
       BlobStore blobStore = getBlobStore();
 
       InputStream is = getBlobInputStream(blobStore, containerName, blobName, signedRequest);
@@ -67,7 +62,7 @@ public class BlobReadCommand extends BlobStoreCommandWithOptions {
             System.out.flush();
          } else {
             if (fileName == null) {
-               throw new CommandException("Must specify --display or file name");
+               throw new IllegalArgumentException("Must specify --display or file name");
             }
             File file = new File(fileName);
             if (!file.exists() && !file.createNewFile()) {

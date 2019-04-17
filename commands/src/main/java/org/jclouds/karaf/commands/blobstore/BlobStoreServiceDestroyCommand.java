@@ -17,8 +17,8 @@
 
 package org.jclouds.karaf.commands.blobstore;
 
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 
@@ -29,7 +29,7 @@ public class BlobStoreServiceDestroyCommand extends BlobStoreCommandBase {
   protected String id;
 
    @Override
-   protected Object doExecute() throws Exception {
+   public Object execute() throws Exception {
       if (id == null) {
         System.err.println("You need to either specify the service id.");
         return null;

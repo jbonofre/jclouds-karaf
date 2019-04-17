@@ -19,7 +19,7 @@ package org.jclouds.karaf.commands.blobstore;
 
 import com.google.common.base.Strings;
 import org.apache.felix.service.command.CommandSession;
-import org.apache.karaf.shell.console.AbstractAction;
+import org.apache.karaf.shell.api.action.Action;
 import org.jclouds.apis.ApiMetadata;
 import org.jclouds.blobstore.BlobStore;
 import org.jclouds.blobstore.BlobStoreContext;
@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 
-public abstract class BlobStoreCommandBase extends AbstractAction {
+public abstract class BlobStoreCommandBase implements Action {
 
    private static final Logger LOGGER = LoggerFactory.getLogger(BlobStoreCommandBase.class);
 
@@ -59,10 +59,7 @@ public abstract class BlobStoreCommandBase extends AbstractAction {
    protected ConfigurationAdmin configAdmin;
 
    @Override
-   public Object execute(CommandSession session) throws Exception {
-      this.session = session;
-      return doExecute();
-   }
+   public abstract Object execute() throws Exception;
 
    public void setBlobStoreServices(List<BlobStore> services) {
       this.blobStoreServices = services;

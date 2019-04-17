@@ -14,19 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jclouds.karaf.commands.blobstore;
 
-import java.io.PrintStream;
 import java.util.Collections;
 import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.CommandException;
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
 import org.jclouds.blobstore.BlobStore;
 import org.jclouds.blobstore.domain.PageSet;
 import org.jclouds.blobstore.domain.StorageMetadata;
@@ -45,7 +41,7 @@ public class BlobListCommand extends BlobStoreCommandWithOptions {
    String directoryPath;
 
    @Override
-   protected Object doExecute() throws Exception {
+   public Object execute() throws Exception {
       BlobStore blobStore = getBlobStore();
 
       ListContainerOptions options = ListContainerOptions.Builder.recursive();

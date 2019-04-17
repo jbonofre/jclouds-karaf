@@ -26,7 +26,6 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 
 import java.util.Hashtable;
-import java.util.Properties;
 
 public class Activator implements BundleActivator {
 

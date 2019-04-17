@@ -17,8 +17,8 @@
 
 package org.jclouds.karaf.commands.blobstore;
 
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.Option;
 import org.jclouds.apis.Apis;
 import org.jclouds.blobstore.BlobStore;
 import org.jclouds.karaf.core.Constants;
@@ -43,7 +43,7 @@ public class BlobStoreServiceCreateCommand extends BlobStoreCommandWithOptions {
    private BundleContext bundleContext;
 
    @Override
-   protected Object doExecute() throws Exception {
+   public Object execute() throws Exception {
       if (provider == null && api == null && name == null) {
          System.err.println("You need to specify at least a valid provider or api.");
          return null;
